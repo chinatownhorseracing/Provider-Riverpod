@@ -21,13 +21,23 @@ final counterProvider = Provider.autoDispose.family<int, Counter>((ref, c) {
   return c.count;
 });
 
+// final autoDisposeFamilyHelloProvider = Provider.autoDispose
+//     .family<String, String>((
+//       ref,
+//       name,
+//     ) {
+//       ref.onDispose(() {
+//         print('[autoDisposeFamilyHelloProvider($name)] disposed');
+//       });
+//       return 'Hello $name';
+//     });
+
 final autoDisposeFamilyHelloProvider = Provider.autoDispose
-    .family<String, String>((
-      ref,
-      name,
-    ) {
-      ref.onDispose(() {
-        print('[autoDisposeFamilyHelloProvider($name)] disposed');
-      });
-      return 'Hello $name';
-    });
+    .family<String, String>(
+      (ref, name) {
+        ref.onDispose(() {
+          print('[autoDisposeFamilyHelloProvider($name)] disposed');
+        });
+        return 'Hello $name';
+      },
+    );
